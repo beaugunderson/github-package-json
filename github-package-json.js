@@ -50,7 +50,16 @@ exports.master = function (repoish, cb) {
 
     debugFn('got package.json');
 
-    cb(null, new Buffer(data.content, 'base64').toString('utf8'));
+    var string = new Buffer(data.content, 'base64').toString('utf8');
+    var json = {};
+
+    try {
+      json = JSON.parse(string);
+    } catch (e) {
+      // pass
+    }
+
+    cb(null, json);
   });
 };
 
