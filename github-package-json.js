@@ -4,6 +4,7 @@ var async = require('async');
 var compact = require('lodash.compact');
 var find = require('lodash.find');
 var GitHub = require('github');
+var githubToObject = require('github-url-to-object');
 var request = require('request');
 
 var github = new GitHub({
@@ -20,10 +21,12 @@ if (process.env.GITHUB_TOKEN) {
   });
 }
 
-exports.master = function (user, repo, cb) {
+exports.master = function (repoish, cb) {
+  var repo = githubToObject(repoish);
+
   github.repos.getContent({
-    user: user,
-    repo: repo,
+    user: repo.user,
+    repo: repo.repo,
     path: 'package.json'
   }, function (err, data) {
     if (err || !data.content) {
@@ -34,10 +37,12 @@ exports.master = function (user, repo, cb) {
   });
 };
 
-exports.pullRequests = function (user, repo, cb) {
+exports.pullRequests = function (repoish, cb) {
+  var repo = githubToObject(repoish);
+
   github.pullRequests.getAll({
-    user: user,
-    repo: repo,
+    user: repo.user,
+    repo: repo.repo,
     state: 'open',
     per_page: '15',
     sort: 'created',
@@ -49,8 +54,8 @@ exports.pullRequests = function (user, repo, cb) {
 
     async.map(pullRequests, function (pullRequest, cbMap) {
       github.pullRequests.getFiles({
-        user: user,
-        repo: repo,
+        user: repo.user,
+        repo: repo.repo,
         number: pullRequest.number,
         per_page: '100'
       }, function (getFilesError, files) {
