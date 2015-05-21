@@ -1,6 +1,6 @@
 {
   "name": "github-package-json",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Get the package.json from master or from open pull requests",
   "main": "github-package-json.js",
   "scripts": {
