@@ -84,8 +84,3 @@ exports.pullRequests = function (user, repo, cb) {
     });
   });
 };
-
-exports.pullRequests('kriskowal', 'q', function (err, data) {
-  console.log('error', err);
-  console.log(data);
-});
