@@ -14,5 +14,19 @@
     "lodash.compact": "^3.0.0",
     "lodash.find": "^3.2.0",
     "request": "^2.55.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beaugunderson/github-package-json.git"
+  },
+  "bugs": {
+    "url": "https://github.com/beaugunderson/github-package-json/issues"
+  },
+  "homepage": "https://github.com/beaugunderson/github-package-json#readme",
+  "keywords": [
+    "github",
+    "package.json",
+    "npm"
+  ]
 }
